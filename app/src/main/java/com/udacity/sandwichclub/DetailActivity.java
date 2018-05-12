@@ -11,6 +11,9 @@ import com.udacity.sandwichclub.model.Sandwich;
 import com.udacity.sandwichclub.utils.JsonUtils;
 import android.widget.TextView;
 
+import butterknife.BindView;
+import butterknife.ButterKnife;
+
 public class DetailActivity extends AppCompatActivity {
 
     public static final String EXTRA_POSITION = "extra_position";
@@ -20,6 +23,7 @@ public class DetailActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_detail);
+        ButterKnife.bind(this);
 
         ImageView ingredientsIv = findViewById(R.id.image_iv);
 
@@ -61,18 +65,26 @@ public class DetailActivity extends AppCompatActivity {
         finish();
         Toast.makeText(this, R.string.detail_error_message, Toast.LENGTH_SHORT).show();
     }
+    // Using butterKnife
+    @BindView(R.id.also_known_tv) TextView alsoKnownAsTv;
+    @BindView(R.id.origin_tv) TextView placeOfOriginTv;
+    @BindView(R.id.description_tv) TextView descriptionTv;
+    @BindView(R.id.ingredients_tv) TextView ingredientTv;
+
 
     private void populateUI(Sandwich sandwich) {
-        TextView alsoKnownAsTv = findViewById(R.id.also_known_tv);
+
+
+        //TextView alsoKnownAsTv = findViewById(R.id.also_known_tv);
         for(int i=0; i<sandwich.getAlsoKnownAs().size();i++)
         {
             alsoKnownAsTv.append(sandwich.getAlsoKnownAs().get(i) + "\n");
         }
-        TextView placeOfOriginTv = findViewById(R.id.origin_tv);
+        //TextView placeOfOriginTv = findViewById(R.id.origin_tv);
         placeOfOriginTv.setText(sandwich.getPlaceOfOrigin());
-        TextView descriptionTv = findViewById(R.id.description_tv);
+        //TextView descriptionTv = findViewById(R.id.description_tv);
         descriptionTv.setText(sandwich.getDescription());
-        TextView ingredientTv = findViewById(R.id.ingredients_tv);
+        //TextView ingredientTv = findViewById(R.id.ingredients_tv);
         for( int i =0; i< sandwich.getIngredients().size(); i++)
         {
             ingredientTv.append(sandwich.getIngredients().get(i) + "\n");
